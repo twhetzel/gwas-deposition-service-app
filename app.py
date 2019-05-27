@@ -3,6 +3,8 @@ from flask_cors import CORS, cross_origin
 from sqlalchemy import create_engine, asc, desc, func
 from sqlalchemy.orm import sessionmaker
 
+from werkzeug import secure_filename
+
 import sys
 sys.path.append('./database')
 import database_setup
@@ -30,6 +32,16 @@ def show_submissions():
     submissions = session.query(Submission).all()
     print "** Subs: ", submissions
     return jsonify(allSubmissions=[sub.serialize for sub in submissions])
+
+
+# TODO: Specify file directory to save to
+@app.route('/uploader', methods = ['POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def uploader():
+   if request.method == 'POST':
+      f = request.files['file']
+      f.save(secure_filename(f.filename))
+      return 'file uploaded successfully'
 
 
 if __name__ == '__main__':

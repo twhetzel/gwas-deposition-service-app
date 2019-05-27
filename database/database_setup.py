@@ -48,7 +48,7 @@ class Submission(Base):
 
 
 
-engine = create_engine('sqlite:///gwas_submissions.db', echo=True)
+engine = create_engine('sqlite:///gwas_submissions.db')
 
 # Create tables
 Base.metadata.create_all(engine)
