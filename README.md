@@ -8,4 +8,11 @@ A demo app to use for development of the GWAS Submission app. The Deposition Ser
 See `requirements.txt` file.
 
 ## Usage
+Set-up the SQLite database by running:  
+`python database_setup.py`
+
+Add demo data to the database as:  
+`python add_submissions.py`
+
+Run the app as:  
 `python app.py`
