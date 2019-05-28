@@ -29,16 +29,36 @@ session = DBSession()
 @app.route('/submissions')
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def show_submissions():
+    '''
+    Lists submissions found in the Submissions database table.
+    '''
     submissions = session.query(Submission).all()
     print "** Subs: ", submissions
     return jsonify(allSubmissions=[sub.serialize for sub in submissions])
+
+
+@app.route('/fileValidation/<int:submission_id>',  methods = ['GET', 'POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def file_validation(submission_id):
+    '''
+    Sets or returns the file validation status.
+    '''
+    # TODO: Add authentication if needed
+    if request.method == 'GET':
+        file_validation_status = session.query(Submission).filter_by(id=submission_id).one()
+        print jsonify(file_validation_status)
+        # return jsonify(file_validation_status)
+        return True
 
 
 # TODO: Specify file directory to save to
 @app.route('/uploader', methods = ['POST'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def uploader():
-   if request.method == 'POST':
+    '''
+    Uploads file to server.
+    '''
+    if request.method == 'POST':
       f = request.files['file']
       f.save(secure_filename(f.filename))
       return 'file uploaded successfully'
