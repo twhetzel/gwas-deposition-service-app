@@ -5,13 +5,19 @@ from sqlalchemy.orm import sessionmaker
 
 from werkzeug import secure_filename
 
+import os.path
 import sys
 sys.path.append('./database')
 import database_setup
 from database_setup import Base, Submission, User
 
 
+# http://flask.pocoo.org/docs/0.12/patterns/fileuploads/
+UPLOAD_FOLDER = './gwas_upload_files'
+ALLOWED_EXTENSIONS = set(['txt', 'xls'])
+
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 app.config['CORS_HEADERS'] = 'Content-Type'
 
@@ -51,7 +57,6 @@ def file_validation(submission_id):
         return True
 
 
-# TODO: Specify file directory to save to
 @app.route('/uploader', methods = ['POST'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def uploader():
@@ -59,9 +64,10 @@ def uploader():
     Uploads file to server.
     '''
     if request.method == 'POST':
-      f = request.files['file']
-      f.save(secure_filename(f.filename))
-      return 'file uploaded successfully'
+        f = request.files['file']
+        filename = secure_filename(f.filename)
+        f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return 'file uploaded successfully'
 
 
 if __name__ == '__main__':
