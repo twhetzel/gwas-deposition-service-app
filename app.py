@@ -32,7 +32,7 @@ session = DBSession()
 
 
 @app.route('/')
-@app.route('/submissions')
+@app.route('/submissions', methods = ['GET'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def show_submissions():
     '''
@@ -43,9 +43,9 @@ def show_submissions():
     return jsonify(allSubmissions=[sub.serialize for sub in submissions])
 
 
-@app.route('/fileValidation/<int:submission_id>',  methods = ['GET', 'POST'])
+@app.route('/fileValidationStatus/<int:submission_id>',  methods = ['GET', 'POST'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
-def file_validation(submission_id):
+def file_validation_status(submission_id):
     '''
     Sets or returns the file validation status.
     '''
@@ -55,6 +55,18 @@ def file_validation(submission_id):
         print jsonify(file_validation_status)
         # return jsonify(file_validation_status)
         return True
+
+
+@app.route('/startFileValidation/<string:file_name>/submission_id/<int:submission_id>',  methods = ['POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def start_file_validation(file_name=None, submission_id=None):
+    '''
+    Given a submission_id and a filename, starts the file validataion process.
+    '''
+    if request.method == 'POST':
+        print "** File validatation process started for: "+file_name+" SubmissionID: "+str(submission_id)
+        return 'testing'
+
 
 
 @app.route('/uploader', methods = ['POST'])
