@@ -73,13 +73,36 @@ def start_file_validation(file_name=None, submission_id=None):
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def uploader():
     '''
-    Uploads file to server.
+    Upload file to server.
     '''
     if request.method == 'POST':
         f = request.files['file']
         filename = secure_filename(f.filename)
         f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         return 'file uploaded successfully'
+
+
+# Consider adding multiple routes to handle optional parameters, to have 
+# one method that updates any column in the table 
+# http://flask.pocoo.org/docs/dev/api/#url-route-registrations
+# @app.route('/updateSubmission/<int:submission_id>/', defaults={'filename': None}, methods = ['POST'])
+@app.route('/updateSubmission/<string:file_name>/submission_id/<int:submission_id>', methods = ['POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def update_submission(file_name=None, submission_id=None):
+    '''
+    Update Submission table.
+    '''
+    if request.method == 'POST':
+        submission = session.query(Submission).filter_by(id=submission_id).one()
+        print('** SubmissionID to update: '+str(submission.id)+' Filename: '+submission.filename)
+        # update_statement = submission.update().where(submission.id == submission_id).values(filename = file_name)
+        submission.filename = file_name
+        print('** New submission filename: '+submission.filename)
+        session.add(submission)
+        session.commit()
+
+        print('** Params: '+file_name+" SubmissionID: "+str(submission_id))
+        return 'Submission table updated successfully'
 
 
 if __name__ == '__main__':

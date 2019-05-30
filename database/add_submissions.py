@@ -52,15 +52,15 @@ print User2.name
 
 
 # Submission info
-submission1 = Submission(user_id=1, publication_id=12334, filename='my_data_file')
+submission1 = Submission(publication_id=12334, filename='', is_valid_format=0, is_valid_data=0, user_id=1)
 session.add(submission1)
 session.commit()
 
-submission2 = Submission(user_id=1, publication_id=1122, filename='my_data_submission')
+submission2 = Submission(publication_id=1122, filename='', is_valid_format=0, is_valid_data=0, user_id=1)
 session.add(submission2)
 session.commit()
 
-submission3 = Submission(user_id=2, publication_id=5678, filename='gwas_data')
+submission3 = Submission(publication_id=5678, filename='', is_valid_format=0, is_valid_data=0, user_id=2)
 session.add(submission3)
 session.commit()
 
