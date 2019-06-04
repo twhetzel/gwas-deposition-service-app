@@ -82,14 +82,20 @@ def start_file_validation(file_name=None, submission_id=None):
         time.sleep(3)
 
 
-        # TODO: Change to make this an endpoint that can be called by Daniel's Flask app, "template-service" 
-        # update is_valid_format column
-        submission = session.query(Submission).filter_by(id=submission_id).one()
-        print('** SubmissionID to update: '+str(submission.id))
-        submission.is_valid_format = 1
-        session.add(submission)
-        session.commit()
-        return 'testing'
+@app.route('/updateFileValidationStatus/submissionId/<int:submission_id>/status/<string:status>/message/<string:message>', methods = ['POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def update_file_validation_status(submissionId=None, status=None, message=None):
+    '''
+    Store the status of the file validation process, performed by an endpoint in the
+    gwas-template-services, in the Submission table.
+    '''
+    submission = session.query(Submission).filter_by(id=submissionId).one()
+    print('** SubmissionID to update: '+str(submission.id))
+    submission.is_valid_format = status
+    submission.message = message
+    session.add(submission)
+    session.commit()
+    return 'Status updated'
 
 
 
