@@ -3,3 +3,5 @@
 *.txt
 *.xls
 gwas_upload_files/*
+submission_templates/*
+*.bak

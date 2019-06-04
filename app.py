@@ -11,6 +11,8 @@ sys.path.append('./database')
 import database_setup
 from database_setup import Base, Submission, User
 
+import time
+
 
 # http://flask.pocoo.org/docs/0.12/patterns/fileuploads/
 UPLOAD_FOLDER = './gwas_upload_files'
@@ -39,8 +41,19 @@ def show_submissions():
     Lists submissions found in the Submissions database table.
     '''
     submissions = session.query(Submission).all()
-    print "** Subs: ", submissions
+    print("** Subs: ", submissions)
     return jsonify(allSubmissions=[sub.serialize for sub in submissions])
+
+
+@app.route('/submission/<int:submission_id>', methods = ['GET'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def show_submission(submission_id=None):
+    '''
+    Get a single Submission.
+    '''
+    submission = session.query(Submission).filter_by(id=submission_id).all()
+    print("** Submission: ", submission)
+    return jsonify(submission=[sub.serialize for sub in submission])
 
 
 @app.route('/fileValidationStatus/<int:submission_id>',  methods = ['GET', 'POST'])
@@ -52,7 +65,7 @@ def file_validation_status(submission_id):
     # TODO: Add authentication if needed
     if request.method == 'GET':
         file_validation_status = session.query(Submission).filter_by(id=submission_id).one()
-        print jsonify(file_validation_status)
+        # print(jsonify(file_validation_status))
         # return jsonify(file_validation_status)
         return True
 
@@ -64,7 +77,18 @@ def start_file_validation(file_name=None, submission_id=None):
     Given a submission_id and a filename, starts the file validataion process.
     '''
     if request.method == 'POST':
-        print "** File validatation process started for: "+file_name+" SubmissionID: "+str(submission_id)
+        print("** File validatation process started for: "+file_name+" SubmissionID: "+str(submission_id))
+        # mock processing time
+        time.sleep(3)
+
+
+        # TODO: Change to make this an endpoint that can be called by Daniel's Flask app, "template-service" 
+        # update is_valid_format column
+        submission = session.query(Submission).filter_by(id=submission_id).one()
+        print('** SubmissionID to update: '+str(submission.id))
+        submission.is_valid_format = 1
+        session.add(submission)
+        session.commit()
         return 'testing'
 
 
@@ -74,6 +98,7 @@ def start_file_validation(file_name=None, submission_id=None):
 def uploader():
     '''
     Upload file to server.
+    REPLACED BY ENDPOINT IN TEMPLATE SERVICE APP
     '''
     if request.method == 'POST':
         f = request.files['file']
@@ -90,7 +115,7 @@ def uploader():
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def update_submission(file_name=None, submission_id=None):
     '''
-    Update Submission table.
+    Update Submission table with filename for the submission.
     '''
     if request.method == 'POST':
         submission = session.query(Submission).filter_by(id=submission_id).one()

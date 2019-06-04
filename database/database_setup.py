@@ -29,8 +29,10 @@ class Submission(Base):
     id = Column(Integer, primary_key=True)
     publication_id = Column(Integer)
     filename = Column(String(250), nullable=False)
-    is_valid_format = Column(Boolean)
-    is_valid_data = Column(Boolean)
+    is_valid_format = Column(Boolean, default=False)
+    # format_validation_error = Column(String(50), default='None')
+    is_valid_data = Column(Boolean, default=False)
+    # data_validation_error = Column(String(50), default='None')
     user_id = Column(Integer,ForeignKey('user.id'))
     user = relationship(User)
     
