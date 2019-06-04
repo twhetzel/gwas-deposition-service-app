@@ -30,9 +30,9 @@ class Submission(Base):
     publication_id = Column(Integer)
     filename = Column(String(250), nullable=False)
     is_valid_format = Column(Boolean, default=False)
-    # format_validation_error = Column(String(50), default='None')
+    format_validation_message = Column(String(50), default='None')
     is_valid_data = Column(Boolean, default=False)
-    # data_validation_error = Column(String(50), default='None')
+    data_validation_message = Column(String(50), default='None')
     user_id = Column(Integer,ForeignKey('user.id'))
     user = relationship(User)
     
@@ -44,7 +44,9 @@ class Submission(Base):
           'publication_id': self.publication_id,
           'filename': self.filename,
           'is_valid_format': self.is_valid_format,
+          'format_validation_message': self.format_validation_message,
           'is_valid_data': self.is_valid_data,
+          'data_validation_message': self.data_validation_message,
           'user_id': self.user_id
         }
 
