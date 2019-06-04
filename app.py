@@ -80,6 +80,7 @@ def start_file_validation(file_name=None, submission_id=None):
         print("** File validatation process started for: "+file_name+" SubmissionID: "+str(submission_id))
         # mock processing time
         time.sleep(3)
+        return 'Validation started...'
 
 
 @app.route('/updateFileValidationStatus/submissionId/<int:submission_id>/status/<string:status>/message/<string:message>', methods = ['POST'])
