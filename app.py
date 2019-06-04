@@ -89,6 +89,8 @@ def update_file_validation_status(submissionId=None, status=None, message=None):
     '''
     Store the status of the file validation process, performed by an endpoint in the
     gwas-template-services, in the Submission table.
+    NOTE: This mocks a needed GOCI endpoint and will be called 
+    by the gwas-template-services app.
     '''
     submission = session.query(Submission).filter_by(id=submissionId).one()
     print('** SubmissionID to update: '+str(submission.id))
@@ -114,7 +116,7 @@ def uploader():
         return 'file uploaded successfully'
 
 
-# Consider adding multiple routes to handle optional parameters, to have 
+# TODO: Consider adding multiple routes to handle optional parameters, to have 
 # one method that updates any column in the table 
 # http://flask.pocoo.org/docs/dev/api/#url-route-registrations
 # @app.route('/updateSubmission/<int:submission_id>/', defaults={'filename': None}, methods = ['POST'])
@@ -123,6 +125,8 @@ def uploader():
 def update_submission(file_name=None, submission_id=None):
     '''
     Update Submission table with filename for the submission.
+    NOTE: This mocks a needed GOCI endpoint and will be called 
+    by the gwas-template-services app.
     '''
     if request.method == 'POST':
         submission = session.query(Submission).filter_by(id=submission_id).one()
