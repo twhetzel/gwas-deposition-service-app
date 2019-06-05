@@ -50,17 +50,85 @@ session.add(User2)
 session.commit()
 print User2.name
 
+User3 = User(name="Annalisa Buniello", email="buniello@ebi.ac.uk")
+session.add(User3)
+session.commit()
+print User3.name
+
+User4 = User(name="Peggy Hall", email="Peggy.Hall@nih.gov")
+session.add(User4)
+session.commit()
+print User4.name
+
+User5 = User(name="Jackie MacArthur", email="jalm@ebi.ac.uk")
+session.add(User5)
+session.commit()
+print User5.name
+
+User6 = User(name="Lizzy Lewis", email="earl@ebi.ac.uk")
+session.add(User6)
+session.commit()
+print User6.name
+
+User7 = User(name="Maria Cerezo", email="mcerezo@ebi.ac.uk")
+session.add(User7)
+session.commit()
+print User7.name
+
+User8 = User(name="Test User", email="someone@ebi.ac.uk")
+session.add(User8)
+session.commit()
+print User8.name
+
+User9 = User(name="Aoife McMahon", email="aoifem@ebi.ac.uk")
+session.add(User9)
+session.commit()
+print User9.name
+
+User10 = User(name="Joannella Morales", email="jmorales@ebi.ac.uk")
+session.add(User10)
+session.commit()
+print User10.name
+
 
 # Submission info
-submission1 = Submission(publication_id=12334, filename='', is_valid_format=0, is_valid_data=0, user_id=1)
+submission1 = Submission(publication_id=1, filename='', is_valid_format=0, is_valid_data=0, user_id=1)
 session.add(submission1)
 session.commit()
 
-submission2 = Submission(publication_id=1122, filename='', is_valid_format=0, is_valid_data=0, user_id=1)
+submission2 = Submission(publication_id=2, filename='', is_valid_format=0, is_valid_data=0, user_id=2)
 session.add(submission2)
 session.commit()
 
-submission3 = Submission(publication_id=5678, filename='', is_valid_format=0, is_valid_data=0, user_id=2)
+submission3 = Submission(publication_id=3, filename='', is_valid_format=0, is_valid_data=0, user_id=3)
+session.add(submission3)
+session.commit()
+
+submission3 = Submission(publication_id=4, filename='', is_valid_format=0, is_valid_data=0, user_id=4)
+session.add(submission3)
+session.commit()
+
+submission3 = Submission(publication_id=5, filename='', is_valid_format=0, is_valid_data=0, user_id=5)
+session.add(submission3)
+session.commit()
+
+submission3 = Submission(publication_id=6, filename='', is_valid_format=0, is_valid_data=0, user_id=6)
+session.add(submission3)
+session.commit()
+
+submission3 = Submission(publication_id=7, filename='', is_valid_format=0, is_valid_data=0, user_id=7)
+session.add(submission3)
+session.commit()
+
+submission3 = Submission(publication_id=8, filename='', is_valid_format=0, is_valid_data=0, user_id=8)
+session.add(submission3)
+session.commit()
+
+submission3 = Submission(publication_id=9, filename='', is_valid_format=0, is_valid_data=0, user_id=9)
+session.add(submission3)
+session.commit()
+
+submission3 = Submission(publication_id=10, filename='', is_valid_format=0, is_valid_data=0, user_id=10)
 session.add(submission3)
 session.commit()
 
