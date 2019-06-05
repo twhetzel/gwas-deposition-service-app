@@ -98,7 +98,7 @@ def update_file_validation_status(submission_id=None, status=None, message=None)
     submission.format_validation_message = message
     session.add(submission)
     session.commit()
-    return 'Status updated'
+    return 'Successful update'
 
 
 
