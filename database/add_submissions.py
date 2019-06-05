@@ -92,15 +92,43 @@ print User10.name
 
 
 # Submission info
-submission1 = Submission(publication_id=12334, filename='', is_valid_format=0, is_valid_data=0, user_id=1)
+submission1 = Submission(publication_id=1, filename='', is_valid_format=0, is_valid_data=0, user_id=1)
 session.add(submission1)
 session.commit()
 
-submission2 = Submission(publication_id=1122, filename='', is_valid_format=0, is_valid_data=0, user_id=1)
+submission2 = Submission(publication_id=2, filename='', is_valid_format=0, is_valid_data=0, user_id=2)
 session.add(submission2)
 session.commit()
 
-submission3 = Submission(publication_id=5678, filename='', is_valid_format=0, is_valid_data=0, user_id=2)
+submission3 = Submission(publication_id=3, filename='', is_valid_format=0, is_valid_data=0, user_id=3)
+session.add(submission3)
+session.commit()
+
+submission3 = Submission(publication_id=4, filename='', is_valid_format=0, is_valid_data=0, user_id=4)
+session.add(submission3)
+session.commit()
+
+submission3 = Submission(publication_id=5, filename='', is_valid_format=0, is_valid_data=0, user_id=5)
+session.add(submission3)
+session.commit()
+
+submission3 = Submission(publication_id=6, filename='', is_valid_format=0, is_valid_data=0, user_id=6)
+session.add(submission3)
+session.commit()
+
+submission3 = Submission(publication_id=7, filename='', is_valid_format=0, is_valid_data=0, user_id=7)
+session.add(submission3)
+session.commit()
+
+submission3 = Submission(publication_id=8, filename='', is_valid_format=0, is_valid_data=0, user_id=8)
+session.add(submission3)
+session.commit()
+
+submission3 = Submission(publication_id=9, filename='', is_valid_format=0, is_valid_data=0, user_id=9)
+session.add(submission3)
+session.commit()
+
+submission3 = Submission(publication_id=10, filename='', is_valid_format=0, is_valid_data=0, user_id=10)
 session.add(submission3)
 session.commit()
 
