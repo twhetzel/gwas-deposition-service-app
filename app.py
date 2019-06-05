@@ -83,16 +83,16 @@ def start_file_validation(file_name=None, submission_id=None):
         return 'Validation started...'
 
 
-@app.route('/updateFileValidationStatus/submissionId/<int:submission_id>/status/<string:status>/message/<string:message>', methods = ['POST'])
+@app.route('/updateFileValidationStatus/submission_id/<int:submission_id>/status/<int:status>/message/<string:message>', methods = ['POST'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
-def update_file_validation_status(submissionId=None, status=None, message=None):
+def update_file_validation_status(submission_id=None, status=None, message=None):
     '''
     Store the status of the file validation process, performed by an endpoint in the
     gwas-template-services, in the Submission table.
     NOTE: This mocks a needed GOCI endpoint and will be called 
     by the gwas-template-services app.
     '''
-    submission = session.query(Submission).filter_by(id=submissionId).one()
+    submission = session.query(Submission).filter_by(id=submission_id).one()
     print("** SubmissionID to update: "+str(submission.id))
     submission.is_valid_format = status
     submission.format_validation_message = message
