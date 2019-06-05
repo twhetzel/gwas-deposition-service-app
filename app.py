@@ -95,7 +95,7 @@ def update_file_validation_status(submissionId=None, status=None, message=None):
     submission = session.query(Submission).filter_by(id=submissionId).one()
     print("** SubmissionID to update: "+str(submission.id))
     submission.is_valid_format = status
-    submission.message = message
+    submission.format_validation_message = message
     session.add(submission)
     session.commit()
     return 'Status updated'
