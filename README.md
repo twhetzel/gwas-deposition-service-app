@@ -14,5 +14,27 @@ Set-up the SQLite database by running:
 Add demo data to the database as:  
 `python add_submissions.py`
 
-Run the app as:  
+Run the app locally as:  
 `python app.py`
+
+Run on the server using the "deploy" script. This contains some non-public information so it's not listed here.
+
+
+## Endpoints
+All endpoints return JSON by default. There are no options to return XML.
+### List all Submissions (GET)
+- Returns a JSON object with a list of all submissions.
+- Signature: `/submissions`
+
+### List submission (GET)
+- Returns a single submission based on the submission id
+- Signature: `/submission/<int:submission_id>`
+
+### Update Filename (POST)
+- Adds the template filename to the database.
+- Signature: `/updateSubmission/<string:file_name>/submission_id/<int:submission_id>`
+
+
+### Update File validataion status (POST)
+- Adds the file validataion status to the database.
+- Signature: `/updateFileValidationStatus/submissionId/<int:submission_id>/status/<string:status>/message/<string:message>`
