@@ -41,7 +41,7 @@ def show_submissions():
     Lists submissions found in the Submissions database table.
     '''
     submissions = session.query(Submission).all()
-    print("** Subs: ", submissions)
+    # print("** Subs: ", submissions)
     return jsonify(allSubmissions=[sub.serialize for sub in submissions])
 
 

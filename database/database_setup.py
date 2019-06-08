@@ -47,7 +47,8 @@ class Submission(Base):
           'format_validation_message': self.format_validation_message,
           'is_valid_data': self.is_valid_data,
           'data_validation_message': self.data_validation_message,
-          'user_id': self.user_id
+          # 'user_id': self.user_id
+          'user_name': self.user.name
         }
 
 
