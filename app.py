@@ -56,6 +56,30 @@ def show_submission(submission_id=None):
     return jsonify(submission=[sub.serialize for sub in submission])
 
 
+@app.route('/createSubmissions', methods = ['POST'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
+def create_submissions():
+    '''
+    Create initial submission by adding PMID, Publication title, and
+    Curator name to the Submission table.
+    '''
+    if request.method == 'POST':
+        # Given the curator name, get the user_id
+        curator_name = request.form['curator'].encode('utf-8')
+        user = session.query(User).filter_by(name=curator_name).one()
+
+        # Create new Submission object
+        # Include filename since this field is required, but update database in future
+        newSubmission = Submission(
+            publication_id = request.form['pmid'].encode('utf-8'),
+            user_id = user.id,
+            filename = '',
+        )
+        session.add(newSubmission)
+        session.commit()
+    return "Successfully created submission!"
+
+
 @app.route('/fileValidationStatus/<int:submission_id>',  methods = ['GET', 'POST'])
 @cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def file_validation_status(submission_id):
